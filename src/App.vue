@@ -9,7 +9,6 @@
       <div class="square" style="--i: 1"></div>
       <div class="square" style="--i: 2"></div>
       <div class="square" style="--i: 3"></div>
-      <div class="square" style="--i: 4"></div>
       <router-view></router-view>
     </div>
   </div>
@@ -86,36 +85,31 @@ export default {
 
 .box .square:nth-child(1) {
   top: -30px;
-  left: 140px;
-  width: 60px;
-  height: 60px;
+  left: 320px;
+  width: 100px;
+  height: 100px;
 }
 
 .box .square:nth-child(2) {
   top: -50px;
-  right: -60px;
+  right: 320px;
   width: 100px;
   height: 100px;
 }
 
 .box .square:nth-child(3) {
-  bottom: -10px;
-  right: -80px;
-  width: 100px;
-  height: 100px;
+  bottom: 50px;
+  right: 180px;
+  width: 120px;
+  height: 120px;
 }
 
-.box .square:nth-child(4) {
-  bottom: -80px;
-  left: 140px;
-  width: 50px;
-  height: 50px;
-}
+
 
 /* 控制最左边元素 */
-.box .square:nth-child(5) {
+.box .square:nth-child(4) {
   bottom: 50px;
-  left: -100px;
+  left: 200px;
   width: 120px;
   height: 120px;
 }

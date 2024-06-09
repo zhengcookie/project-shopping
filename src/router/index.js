@@ -1,9 +1,10 @@
-import Home from "../components/views/main/Home.vue"
-import Layout from "../components/views/Layout.vue"
+import Home from "../views/main/Home.vue"
+import Layout from "../views/Layout.vue"
 import Vue from "vue"
 import VueRouter from "vue-router"
 Vue.use(VueRouter)
 const routes = [
+   
     {
         path:"/",
         name:"layout",
@@ -20,7 +21,7 @@ const routes = [
             {
                 path:"params",
                 name:"Params",
-                component:()=> import("../components/views/main/Params.vue"),
+                component:()=> import("../views/main/Params.vue"),
                 meta:{
                     isLogin:true
                 }
@@ -28,7 +29,7 @@ const routes = [
             {
                 path:"ad",
                 name:"AD",
-                component:()=> import("../components/views/main/ADCategory.vue"),
+                component:()=> import("../views/main/ADCategory.vue"),
                 meta:{
                     isLogin:true
                 }
@@ -36,7 +37,7 @@ const routes = [
             {
                 path:"product",
                 name:"Product",
-                component:()=> import("../components/views/main/Product.vue"),
+                component:()=> import("../views/main/Product.vue"),
                 meta:{
                     isLogin:true
                 }
@@ -46,7 +47,7 @@ const routes = [
     {
         path:"/login",
         name:"Login",
-        component:() => import("../components/views/Login.vue")
+        component:() => import("../views/Login.vue")
     }
    
 ]
