@@ -10,9 +10,9 @@
     <el-menu-item index="/product"> 商品管理 </el-menu-item>
     <el-menu-item index="/params"> 规格参数 </el-menu-item>
     <el-menu-item index="/ad"> 广告管理 </el-menu-item>
-    <el-menu-item class="user">
+    <el-menu-item class="user" active>
       <span class="user-name">{{ user.username }}</span>
-      <el-button @click="exit" icon="el-icon-switch-button"></el-button>
+      <el-button style="background-color: unset" @click="exit" icon="el-icon-switch-button"></el-button>
     </el-menu-item>
   </el-menu>
 </template>
