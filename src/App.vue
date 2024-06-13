@@ -104,8 +104,6 @@ export default {
   height: 120px;
 }
 
-
-
 /* 控制最左边元素 */
 .box .square:nth-child(4) {
   bottom: 50px;
