@@ -1,9 +1,7 @@
 <template>
   <div class="login">
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        商城后台管理系统
-      </div>
+      <div slot="header" class="clearfix">商城后台管理系统</div>
       <el-tabs v-model="currentName" stretch @tab-click="handletabsClick">
         <el-tab-pane label="登录" name="login">
           <el-form
@@ -87,7 +85,9 @@
 </template>
 
 <script>
-import api from "../api"
+import api from "../api";
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     // 验证规则
@@ -103,7 +103,7 @@ export default {
     var validatePassword = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
-      }else {
+      } else {
         callback();
       }
     };
@@ -136,7 +136,7 @@ export default {
         username: "",
         password: "",
         confirmedPassword: "",
-        email:""
+        email: "",
       },
       rules: {
         username: [{ validator: validateUsername, trigger: "blur" }],
@@ -144,30 +144,60 @@ export default {
         confirmedPassword: [
           { validator: validateconfirmedPassword, trigger: "blur" },
         ],
-        email: [
-          { validator: validateconfirmedEmail, trigger: "blur" },
-        ],
+        email: [{ validator: validateconfirmedEmail, trigger: "blur" }],
       },
-      activeTab:"login",
+      activeTab: "login",
     };
   },
+  mounted() {
+    console.log(this.$router.match("/").meta.isLogin)
+  },
   methods: {
+    ...mapMutations("login", ["setUser"]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-            if (this.activeTab === "login") {
-              // 登录
-              api.login(this.loginForm).then(res =>{
-                console.log(res.data)
-              })
-            }
-            else if (this.activeTab === "register"){
-              // 注册
-              api.login(this.registerForm).then(res =>{
-                console.log(res)
-              })
-              // console.log(this.registerForm)
-            }
+          if (this.activeTab === "login") {
+            // 登录
+            api.login(this.loginForm).then((res) => {
+              console.log(res.data);
+              if (res.data.status === 200) {
+                this.setUser(res.data);
+                localStorage.setItem("ego", JSON.stringify(res.data));
+                // this.$router.options.routes[0].children[0].meta.isLogin = false
+                this.$router.match("/").meta.isLogin = false;
+                this.$router.push("/");
+              } else {
+                const h = this.$createElement
+                this.$notify.error({
+                  title: "登录错误",
+                  message: h("i", {style:"color:teal"},"用户名或密码错误" + `(status: ${res.data.status})`)
+                });
+              }
+            });
+          } else if (this.activeTab === "register") {
+            // 注册
+            api.register(this.registerForm).then((res) => {
+              console.log(res.data);
+              if (res.data.status === 200) {
+           
+                const h = this.$createElement
+                this.$notify({
+                  title: "注册成功",
+                  message: h("i", {style:"color:teal"},res.data.msg + `(status: ${res.data.status})`)
+                });
+                this.currentName = "login";
+                this.activeTab = "login"
+              } else {
+                const h = this.$createElement
+                this.$notify.error({
+                  title: "注册失败",
+                  message: h("i", {style:"color:teal"},res.data.msg + `(status: ${res.data.status})`)
+                });
+              }
+            });
+            // console.log(this.registerForm)
+          }
         } else {
           console.log("error submit!!");
           return false;
@@ -176,7 +206,7 @@ export default {
     },
     handletabsClick(tab) {
       console.log(tab.name);
-      this.activeTab = tab.name
+      this.activeTab = tab.name;
     },
   },
 };
@@ -184,13 +214,17 @@ export default {
 
 <style scoped lang="less">
 .login {
-  width: 1000px;
-  margin: 0 auto;
+  display: flex; /* 使用 Flexbox 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  height: 100vh; /* 占据整个视口的高度 */
   .box-card {
-    width: 500px;
-    margin: 100px auto;
-    border-radius: 15px;
-    background: rgba(255, 255, 255, .8);
-  }
+  width: 500px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
 }
+}
+
+
+
 </style>
