@@ -70,6 +70,7 @@ export default {
   /* 添加装饰动画 */
   animation: animate 10s linear infinite;
   animation-delay: calc(-1s * var(--i));
+  z-index: -1;
 }
 
 @keyframes animate {

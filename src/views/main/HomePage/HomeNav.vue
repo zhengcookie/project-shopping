@@ -2,12 +2,16 @@
   <div class="home-nav">
     <div class="home-title"><h2>产品分类</h2></div>
     <el-row v-for="(product, index) in productList" :key="index">
-      <el-menu background-color="#545c6400" :collapse-transition="false">
-        <el-submenu index="1">
+      <el-menu
+        background-color="#545c6400"
+        :collapse-transition="true"
+        width="auto"
+      >
+        <el-submenu index="index">
           <template slot="title">
             <h3>{{ product.title }}</h3>
           </template>
-          <el-menu-item-group v-for="(p, index) in product.list" :key="index">
+          <el-menu-item-group v-for="(p, index) in product.list" :key="index"  >
             <el-menu-item index="1-1"
               ><a :href="p.url">{{ p.name }}</a>
               <span class="hot-tag" v-if="p.hot">Hot</span>
@@ -59,9 +63,82 @@ export default {
             },
           ],
         },
+        {
+          title: "图书",
+          list: [
+            {
+              id: 1,
+              name: "文学",
+              hot: false,
+              url: "https://www.baidu.com/",
+            },
+            {
+              id: 2,
+              name: "小说",
+              hot: true,
+              url: "https://www.baidu.com/",
+            },
+          ],
+        },
+        {
+          title: "食品",
+          list: [
+            {
+              id: 1,
+              name: "生鲜",
+              hot: false,
+              url: "https://www.baidu.com/",
+            },
+            {
+              id: 2,
+              name: "健康",
+              hot: true,
+              url: "https://www.baidu.com/",
+            },
+          ],
+        },
+        {
+          title: "娱乐",
+          list: [
+            {
+              id: 1,
+              name: "电影",
+              hot: false,
+              url: "https://www.baidu.com/",
+            },
+            {
+              id: 2,
+              name: "运动",
+              hot: true,
+              url: "https://www.baidu.com/",
+            },
+          ],
+        },
+        {
+          title: "美妆",
+          list: [
+            {
+              id: 1,
+              name: "护肤",
+              hot: false,
+              url: "https://www.baidu.com/",
+            },
+            {
+              id: 2,
+              name: "祛湿",
+              hot: true,
+              url: "https://www.baidu.com/",
+            },
+          ],
+        },
       ],
     };
   },
+  methods: {
+    
+  },
+  computed:{
+  }
 };
 </script>
 
@@ -71,20 +148,21 @@ export default {
   margin-top: 15px;
   background: rgba(255, 255, 255, 0.5);
 }
-.home-title{
+.home-title {
   height: 50px;
-  background-color:pink;
-  width: 200px;
+  background-color: pink;
+  width: 250px;
 }
-.home-title h2{
+.home-title h2 {
   color: #fff;
   line-height: 50px;
+  text-align: center;
 }
 .hot-tag {
   color: #fff;
   background: red;
 }
-a{
+a {
   color: black;
 }
 </style>
